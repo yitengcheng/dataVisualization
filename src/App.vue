@@ -1,8 +1,6 @@
 <template>
   <el-container id="app">
-    <el-main class="main">
-      <router-view></router-view>
-    </el-main>
+    <router-view></router-view>
   </el-container>
 </template>
 <script>

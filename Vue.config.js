@@ -15,11 +15,11 @@ module.exports = {
     },
     parallel: require('os').cpus().length > 1,
     devServer: {
+        hot: true,
         open: true,
         host: '0.0.0.0',
         port: 8080,
         https: false,
-        hotOnly: false,
         disableHostCheck: true,
         proxy: {//反向代理的方式解决跨域
             '/api': {

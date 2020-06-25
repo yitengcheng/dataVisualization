@@ -11,6 +11,7 @@ import axios from 'axios';
 import loadsh from 'lodash';
 import store from './vuex/index';
 import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 import { currency } from './utils/currency';
 import * as utils from './utils/validation';
 import moment from 'moment';
