@@ -24,13 +24,13 @@
                         <DataTitle title="社区治理" :datas="communityGovernance"/>
                     </div>
                     <div class="community_box_bottom_item">
-                        <EchartsLineOrBar title="实有人口走访核对率" :option="visitData" value1="30%"/>
+                        <Echarts title="实有人口走访核对率" :option="visitData" value1="30%"/>
                     </div>
                     <div class="community_box_bottom_item">
-                        <EchartsLineOrBar title="重点关注走访核对率" :option="focusOnData" value1="50%"/>
+                        <Echarts title="重点关注走访核对率" :option="focusOnData" value1="50%"/>
                     </div>
                     <div class="community_box_bottom_item">
-                        <EchartsLineOrBar title="重点管控走访核对率" :option="keyToControlData" value1="100%" :isPass="true"/>
+                        <Echarts title="重点管控走访核对率" :option="keyToControlData" value1="100%" :isPass="true"/>
                     </div>
                     <div class="community_box_bottom_item" style="flexDirection:column">
                         <div class="community_box_bottom_item_info" v-for="(item,index) in houseUsage" :key="index">
@@ -43,7 +43,7 @@
                     </div>
                     <div class="community_box_bottom_item" style="flexDirection:column;flex:1">
                         <div class="community_box_bottom_item_text_info" v-for="(item, index) in communityInfoList" :key="index">
-                            <div class="community_box_bottom_item_text_info_box" style="background-color:gray;color:#000">{{item.title}}</div>
+                            <div class="community_box_bottom_item_text_info_box" style="background-color:gray;color:#000;">{{item.title}}</div>
                             <div class="community_box_bottom_item_text_info_box">共计：<br>{{item.total}}</div>
                             <div class="community_box_bottom_item_text_info_box">{{item.unfinishedTitle}}<br>{{item.unfinished}}</div>
                             <div class="community_box_bottom_item_text_info_box">{{item.completeTitle}}<span :class="[item.complete<0.6?'redText':item.complete>=0.6 && item.complete<0.8 ? 'orangeText':'greenText']">{{item.complete * 100}}%</span></div>
@@ -52,8 +52,42 @@
                 </div>
             </div>
         </div>
-        <div class='middle'></div>
-        <div class='bottom'></div>
+        <el-divider class="divider"></el-divider>
+        <div class='middle'>
+            <div class="middle_item">
+                <DataTitle title="培训就业" :datas="trainingBoxDatas"/>
+            </div>
+            <div class="middle_item">
+                <Echarts title="就业率" :option="employmentRate" value1="80%" value2="90%" :isShowBottom="false"/>
+            </div>
+            <div class="middle_item" style="margin-right:20px;">
+                <Echarts title="外出务工情况" :option="workOutsideRate" value1="42%" value2="58%" :isShowBottom="false"/>
+            </div>
+            <div class="middle_item" style="margin-right:20px;">
+                <Echarts title="智能匹配本地就业率" :option="matchTheJobsDatas" value1="90%" value2="" :isShowBottom="false"/>
+            </div>
+            <div class="middle_item_double" style="margin-right:20px;">
+                <EchartsDouble title="本地企业差额用工情况" :option1="lackPropleInfoData" value1="差额人员200" :option2="lackPeopleData" value2="差额技能人员200"/>
+            </div>
+            <div class="middle_item" style="width:5rem;margin-right:20px;">
+                <Echarts title="待业原因情况" :option="unemploymentReason" value1="待核查人数：41" value2="已核查人数：159" :isShowBottom="false"/>
+            </div>
+        </div>
+        <el-divider class="divider"></el-divider>
+        <div class='bottom'>
+            <div class="bottom_box">
+                <div class="bottom_box_title">公共服务</div>
+                <div style="display:flex;flex:1;align-items: center;justify-content:center;font-size:20px;color:#ffffff;">建设中</div>
+            </div>
+            <div class="bottom_box">
+                <div class="bottom_box_title">文化服务</div>
+                <div style="display:flex;flex:1;align-items: center;justify-content:center;font-size:20px;color:#ffffff;">建设中</div>
+            </div>
+            <div class="bottom_box">
+                <div class="bottom_box_title">基层党建</div>
+                <div style="display:flex;flex:1;align-items: center;justify-content:center;font-size:20px;color:#ffffff;">建设中</div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -62,9 +96,10 @@ import PlainSelect from '../components/plain/PlainSelect';
 import PlainDatePick from '../components/plain/PlainDatePick';
 import DataIcon from '../components/DataIcon';
 import DataTitle from '../components/DataTitle';
-import EchartsLineOrBar from '../components/EchartsLineOrBar';
+import Echarts from '../components/Echarts';
+import EchartsDouble from '../components/EchartsDouble';
 export default {
-    components:{PlainSelect,PlainDatePick,DataIcon,DataTitle,EchartsLineOrBar},
+    components:{PlainSelect,PlainDatePick,DataIcon,DataTitle,Echarts,EchartsDouble},
     data(){
         return { 
             areaData: ['明田街道'],
@@ -86,6 +121,9 @@ export default {
                     type: 'category',
                     axisTick:{
                         "show":false
+                    },
+                    axisLabel: {
+                        color: '#ffffff'
                     },
                     data: ['实有人口', '走访人口']
                 },
@@ -110,7 +148,6 @@ export default {
                     name: {
                         textStyle: {
                             color: '#fff',
-                            backgroundColor: '#999',
                             borderRadius: 3,
                             padding: [3, 5],
                             fontSize:8
@@ -130,11 +167,21 @@ export default {
                     data: [
                         {
                             value: [23,24,57,89],
-                            name: '实际人员'
+                            name: '实际人员',
+                            areaStyle: {
+                                normal: {
+                                    color: '#72ACD1'
+                                }
+                            }
                         },
                         {
                             value: [15,24,55,89],
-                            name: '走访人员'
+                            name: '走访人员', 
+                            areaStyle: {
+                                normal: {
+                                    color: '#72ACD1'
+                                }
+                            }
                         }
                     ],
                 }]
@@ -144,7 +191,6 @@ export default {
                     name: {
                         textStyle: {
                             color: '#fff',
-                            backgroundColor: '#999',
                             borderRadius: 3,
                             padding: [3, 5],
                             fontSize:8
@@ -165,11 +211,21 @@ export default {
                     data: [
                         {
                             value: [69,49,35,57,89],
-                            name: '实际人员'
+                            name: '实际人员',
+                            areaStyle: {
+                                normal: {
+                                    color: '#72ACD1'
+                                }
+                            }
                         },
                         {
                             value: [60,46,34,55,89],
-                            name: '走访人员'
+                            name: '走访人员',
+                            areaStyle: {
+                                normal: {
+                                    color: '#72ACD1'
+                                }
+                            }
                         }
                     ],
                 }]
@@ -183,7 +239,215 @@ export default {
                 {title:'矛盾纠纷事件',total:'84',unfinishedTitle:'待调处：',unfinished:'14',completeTitle:'调处率：',complete:0.7},
                 {title:'风险隐患事件',total:'56',unfinishedTitle:'待处理：',unfinished:'36',completeTitle:'完成率：',complete:0.45},
                 {title:'居民诉求上报事件',total:'34',unfinishedTitle:'待处理：',unfinished:'2',completeTitle:'完成率：',complete:0.85},
-            ]
+            ],
+            trainingBoxDatas:[
+                {icon:'劳动力',value:'2465',label:'具备劳动力人数', w:".5rem" ,h:".5rem"},
+                {icon:'不具备劳动力',value:'465',label:'不具备劳动力人数', w:".5rem" ,h:".5rem"},
+                {icon:'企业',value:'500',label:'企业需求用工数量', w:".5rem" ,h:".5rem"},
+                {icon:'待业',value:'200',label:'待业人员数量', w:".5rem" ,h:".5rem"},
+            ],
+            employmentRate:{
+                title: [{
+                    text: '2465',
+                    top: 'center',
+                    left: 'center',
+                    textStyle: {
+                        color:'#fff'
+                    }
+                }],
+                series: [{
+                    type: 'pie',
+                    radius: ['30%', '70%'],
+                    center: ['50%', '50%'],
+                    data: [{
+                        name: "就业",
+                        value: "5660"
+                    },
+                    {
+                        name: "待业",
+                        value: "2598"
+                    }],
+                    label:{
+                        normal:{
+                            show:true,
+                            position:'inner', //标签的位置
+                            textStyle : {
+                                fontWeight : 300 ,
+                                fontSize : 14
+                            },
+                            formatter:'{c}'
+                        }
+                    },
+                }]
+            },
+            workOutsideRate:{
+                title: [{
+                    text: '1465',
+                    top: 'center',
+                    left: 'center',
+                    textStyle: {
+                        color:'#fff'
+                    }
+                }],
+                series: [{
+                    type: 'pie',
+                    radius: ['30%', '70%'],
+                    center: ['50%', '50%'],
+                    data: [{
+                        name: "本地就业",
+                        value: "1300"
+                    },
+                    {
+                        name: "外出就业",
+                        value: "890"
+                    }],
+                    label:{
+                        normal:{
+                            show:true,
+                            position:'inner', //标签的位置
+                            textStyle : {
+                                fontWeight : 300 ,
+                                fontSize : 14
+                            },
+                            formatter:'{d}%'
+                        }
+                    },
+                }]
+            },
+            matchTheJobsDatas:{
+                radar: {
+                    name: {
+                        textStyle: {
+                            color: '#fff',
+                            borderRadius: 3,
+                            padding: [3, 5],
+                            fontSize:8
+                        }
+                    },
+                    nameGap : 1,
+                    center:['50%','50%'], 
+                    indicator: [
+                        { name: '养殖', max: 140},
+                        { name: '种植', max: 140},
+                        { name: '建筑', max: 140},
+                        { name: '家政服务', max: 140},
+                        { name: '畅饮服务', max: 140},
+                        { name: '销售', max: 140},
+                        { name: '会计', max: 140},
+                    ]
+                },
+                series: [{
+                    type: 'radar',
+                    data: [
+                        {
+                            value: [69,58,78,68,86,74,23],
+                            name: '企业需求人员',
+                        },
+                        {
+                            value: [56,46,126,34,66,34,12],
+                            name: '待业技能人员', 
+                        }
+                    ],
+                }]
+            },
+            lackPeopleData:{
+                xAxis: {
+                    type: 'category',
+                    axisTick:{
+                        "show":false
+                    },
+                    axisLabel: {
+                        color: '#ffffff',
+                        fontSize:8,
+                        rotate: 20,
+                    },
+                    data: ['养殖', '种植','建筑','家政服务', '畅饮服务', '销售', '会计']
+                },
+                yAxis: {
+                    show:false,
+                    type: 'value'
+                },
+                grid: {
+                    x: 10,
+                    y: 0,
+                    x2:10,
+                    y2:20
+                },
+                series: [{
+                    data: [56,46,126,34,66,34,12],
+                    type: 'bar',
+                    barWidth:20,
+                }]
+            },
+            lackPropleInfoData:{
+                xAxis: {
+                    type: 'category',
+                    axisTick:{
+                        "show":false
+                    },
+                    axisLabel: {
+                        color: '#ffffff'
+                    },
+                    data: ['所需人员', '待业人员']
+                },
+                yAxis: {
+                    show:false,
+                    type: 'value'
+                },
+                grid: {
+                    x: 10,
+                    y: 0,
+                    x2:10,
+                    y2:20
+                },
+                series: [{
+                    data: [456, 256],
+                    type: 'bar',
+                    barWidth:40,
+                }]
+            },
+            unemploymentReason:{
+                grid: {
+                    x: 80,
+                    y: 10,
+                    x2:10,
+                    y2:10
+                },
+                yAxis: [{
+                    type: 'category',
+                    data: ['没有技能','照顾家人','生病','找不到工作','自由职业'],
+                    inverse: true,
+                    axisTick: {
+                        alignWithLabel: true,
+ 
+ 
+                    },
+                    axisLabel: {
+                        margin: 10,
+                        textStyle: {
+                            fontSize: 10,
+                            color: 'white'
+                        }
+                    },
+                }],
+                xAxis: {show: false},
+                series: [{
+                    name: 'Top 10',
+                    type: 'bar',
+                    barWidth: 26,
+                    data: [39,23,14,56,34],
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'insideRight',
+                            textStyle: {
+                                color: '#fff', //color of value
+                                fontSize: 14,
+                            }
+                        }
+                    }
+                }]
+            }
         };
     }
     
@@ -195,6 +459,7 @@ export default {
     flex:1;
     flex-direction: column;
     background:url('../assets/bg.png') no-repeat center center;
+    overflow: hidden;
 }
 .title {
     display: flex;
@@ -220,7 +485,9 @@ export default {
 }
 .top {
     display: flex;
-    flex:1.5;
+    width:100%;
+    height: 4.43rem;
+    align-items: center;
     flex-direction: row;
 }
 .map_box {
@@ -229,8 +496,10 @@ export default {
 }
 .community_box {
     display: flex;
-    flex:1;
+    height: 4.43rem;
+    width:100%;
     flex-direction: column;
+    justify-content: center;
 }
 .community_box_top_data{
     display: flex;
@@ -245,7 +514,7 @@ export default {
 }
 .community_box_bottom_item{
     display: flex;
-    height: 2.75rem;
+    height: 3.25rem;
     width: 2.5rem;
     margin-right: 20px;
 }
@@ -260,7 +529,7 @@ export default {
 }
 .community_box_bottom_item_info_title{
     background-color:gray;
-    font-size:12px;
+    font-size:14px;
     width:100%;
     text-align:center;
     border-radius: 3px;
@@ -271,17 +540,20 @@ export default {
     flex-direction: column;
     justify-content: center;
     color: #fff;
+    font-size:18px;
 }
 .community_box_bottom_item_text_info{
     display: flex;
     flex-direction: row;
     align-items: space-around;
+    flex-wrap: wrap;
 }
 .community_box_bottom_item_text_info_box{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     flex:1;
+    min-height:.75rem;
     border:1px solid gray;
     border-radius: 5px;
     margin-top: 1px;
@@ -290,6 +562,7 @@ export default {
     justify-content: center;
     padding: 0px 5px;
     color: #ffffff;
+    font-size: 22px;
 }
 .redText{
     color:red
@@ -301,17 +574,45 @@ export default {
     color:green
 }
 .divider{
-    margin-top:10px;
-    margin-bottom:10px;
+    margin:10px 0px;
 }
 .middle {
     display: flex;
-    flex:1;
-    background-color:green
+    width:100%;
+    height: 4.43rem;
+    align-items: center;
+    flex-direction: row;
+}
+.middle_item {
+    display: flex;
+    height:3.25rem;
+    width: 3rem;
+}
+.middle_item_double{
+    display: flex;
+    height: 3.25rem;
+    width: 6rem;
 }
 .bottom {
     display: flex;
-    flex:1;
-    background-color:yellow
+    width:100%;
+    height: 4.43rem;
+    align-items: center;
+    flex-direction: row;
+}
+.bottom_box {
+    display: flex;
+    flex-direction: row;
+    width:30%;
+    height: 3rem;
+}
+.bottom_box_title {
+    display: flex;
+    padding: 10px;
+    width:.25rem;
+    height: 2.5rem;
+    align-items: center;
+    font-size:20px;
+    background-color:gray;
 }
 </style>

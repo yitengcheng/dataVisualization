@@ -29,6 +29,7 @@ export default {
 <style lang='scss' scoped>
 .box {
     display: flex;
+    flex:1;
     flex-direction: row;
     align-items: center;
 }
@@ -38,6 +39,7 @@ export default {
     width:.25rem;
     height: 2.5rem;
     align-items: center;
+    font-size:20px;
     background-color:gray;
 
 }

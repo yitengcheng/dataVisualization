@@ -1,7 +1,7 @@
 <template>
     <div class='box'>
         <icon :w="w" :h="h" :name="icon"/>
-        <div class="box_label">{{label}}</div>
+        <div :class="[label.length<=4 ? 'box_label': 'box_label_large']">{{label}}</div>
         <div class="box_value">{{value}}</div>
     </div>
 </template>
@@ -44,12 +44,20 @@ export default {
     display: flex;
     flex-wrap: wrap;
     width:.5rem;
-    font-size:14px;
+    font-size:18px;
+    color:#fff;
+    margin: 0px 5px;
+}
+.box_label_large{
+    display: flex;
+    flex-wrap: wrap;
+    width:.8rem;
+    font-size:16px;
     color:#fff;
     margin: 0px 5px;
 }
 .box_value {
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 700;
     color:#fff;
 }
