@@ -10,6 +10,7 @@ Router.prototype.replace = function replace (location) {
 };
 
 export default new Router({
+    base: '/dataVisualization/',
     mode: 'history',
     routes: [
         {

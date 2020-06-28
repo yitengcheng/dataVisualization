@@ -4,11 +4,11 @@
         <div class="echarts_box">
             <div class="echarts_box_left">
                 <v-chart theme="light" class="echarts1" :options="option1"></v-chart>
-                <div style="color:#fff;fontSize:20px">{{value1}}</div>
+                <div style="color:#72ACD1;fontSize:20px">{{value1}}</div>
             </div>
             <div class="echarts_box_right">
                 <v-chart theme="light" class="echarts2" :options="option2"></v-chart>
-                <div style="color:#fff;fontSize:20px">{{value2}}</div>
+                <div style="color:#72ACD1;fontSize:20px">{{value2}}</div>
             </div>
         </div>
         

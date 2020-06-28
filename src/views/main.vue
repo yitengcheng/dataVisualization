@@ -117,6 +117,9 @@ export default {
                 {icon:'事件',value:'1453',label:'上报事件', w:".5rem" ,h:".5rem"},
             ],
             visitData:{
+                animationDuration: function () {
+                    return Math.random() * 10000;
+                },
                 xAxis: {
                     type: 'category',
                     axisTick:{
@@ -144,6 +147,9 @@ export default {
                 }]
             },
             focusOnData:{
+                animationDuration: function () {
+                    return Math.random() * 10000;
+                },
                 radar: {
                     name: {
                         textStyle: {
@@ -170,7 +176,7 @@ export default {
                             name: '实际人员',
                             areaStyle: {
                                 normal: {
-                                    color: '#72ACD1'
+                                    color: 'yellow'
                                 }
                             }
                         },
@@ -187,6 +193,9 @@ export default {
                 }]
             },
             keyToControlData:{
+                animationDuration: function () {
+                    return Math.random() * 10000;
+                },
                 radar: {
                     name: {
                         textStyle: {
@@ -214,7 +223,7 @@ export default {
                             name: '实际人员',
                             areaStyle: {
                                 normal: {
-                                    color: '#72ACD1'
+                                    color: 'yellow'
                                 }
                             }
                         },
@@ -247,6 +256,9 @@ export default {
                 {icon:'待业',value:'200',label:'待业人员数量', w:".5rem" ,h:".5rem"},
             ],
             employmentRate:{
+                animationDuration: function () {
+                    return Math.random() * 10000;
+                },
                 title: [{
                     text: '2465',
                     top: 'center',
@@ -273,7 +285,8 @@ export default {
                             position:'inner', //标签的位置
                             textStyle : {
                                 fontWeight : 300 ,
-                                fontSize : 14
+                                fontSize : 14,
+                                color:'red'
                             },
                             formatter:'{c}'
                         }
@@ -281,6 +294,9 @@ export default {
                 }]
             },
             workOutsideRate:{
+                animationDuration: function () {
+                    return Math.random() * 10000;
+                },
                 title: [{
                     text: '1465',
                     top: 'center',
@@ -307,7 +323,8 @@ export default {
                             position:'inner', //标签的位置
                             textStyle : {
                                 fontWeight : 300 ,
-                                fontSize : 14
+                                fontSize : 14,
+                                color:'red'
                             },
                             formatter:'{d}%'
                         }
@@ -315,6 +332,9 @@ export default {
                 }]
             },
             matchTheJobsDatas:{
+                animationDuration: function () {
+                    return Math.random() * 10000;
+                },
                 radar: {
                     name: {
                         textStyle: {
@@ -351,6 +371,9 @@ export default {
                 }]
             },
             lackPeopleData:{
+                animationDuration: function () {
+                    return Math.random() * 10000;
+                },
                 xAxis: {
                     type: 'category',
                     axisTick:{
@@ -380,6 +403,9 @@ export default {
                 }]
             },
             lackPropleInfoData:{
+                animationDuration: function () {
+                    return Math.random() * 10000;
+                },
                 xAxis: {
                     type: 'category',
                     axisTick:{
@@ -407,6 +433,9 @@ export default {
                 }]
             },
             unemploymentReason:{
+                animationDuration: function () {
+                    return Math.random() * 10000;
+                },
                 grid: {
                     x: 80,
                     y: 10,
