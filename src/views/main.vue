@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class='top'>
-            <icon name="地图" class="map_box"></icon>
+            <img class='map_box' src='../assets/shequ_lan.png'/>
             <div class="community_box">
                 <div class="community_box_top_data" >
                     <DataIcon v-for="(item,index) in communityBoxDatas" :key="index" :icon="item.icon" :value="item.value" :label="item.label"/>
@@ -603,7 +603,7 @@ export default {
 .bottom_box {
     display: flex;
     flex-direction: row;
-    width:30%;
+    width:33%;
     height: 3rem;
 }
 .bottom_box_title {
